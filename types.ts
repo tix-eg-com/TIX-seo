@@ -1,5 +1,6 @@
 
 export interface ProductInput {
+  merchantId: string;
   name: string;
   description: string;
   image: File | null;
@@ -17,8 +18,6 @@ export interface GroundingSource {
   title: string;
   uri: string;
 }
-
-// --- New Tix Architecture Types (Rule 8 Compliant) ---
 
 export interface MerchantFeedback {
   summary: string;
@@ -57,26 +56,21 @@ export interface ListingContent {
 export interface ProductAnalysisResponse {
   status: AnalysisStatus;
   merchant_feedback: MerchantFeedback;
-  listing_content?: ListingContent; // Optional because rejected listings might not have full content
+  listing_content?: ListingContent;
   grounding_sources?: GroundingSource[];
 }
 
-// --- End New Types ---
-
-export interface ImageGenerationResult {
-  whiteBackgroundUrl?: string;
-  lifestyleUrl?: string;
-}
-
-export enum GenerationStatus {
-  IDLE = 'IDLE',
-  LOADING = 'LOADING',
-  SUCCESS = 'SUCCESS',
-  ERROR = 'ERROR'
+export interface HistoryRecord {
+  merchantId: string;
+  productName: string;
+  h1_title: string;
+  description: string;
+  timestamp: number;
 }
 
 export enum AppTab {
   SEO = 'SEO',
   IMAGES = 'IMAGES',
+  HISTORY = 'HISTORY',
   ARCHITECTURE = 'ARCHITECTURE'
 }

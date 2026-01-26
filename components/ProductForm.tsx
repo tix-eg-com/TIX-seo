@@ -1,7 +1,7 @@
 
 import React, { useRef } from 'react';
 import { ProductInput } from '../types';
-import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { PhotoIcon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 
 interface ProductFormProps {
   input: ProductInput;
@@ -30,6 +30,21 @@ export const ProductForm: React.FC<ProductFormProps> = ({ input, setInput, onSub
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 arabic-text" dir="rtl">
       <div className="space-y-6">
         
+        {/* Merchant ID */}
+        <div>
+          <label className="block text-sm font-bold text-slate-700 mb-1 flex items-center gap-2">
+            <UserCircleIcon className="h-4 w-4 text-emerald-600" /> اسم المتجر أو التاجر
+          </label>
+          <input
+            type="text"
+            value={input.merchantId}
+            onChange={(e) => setInput({ ...input, merchantId: e.target.value })}
+            placeholder="مثال: متجر السعادة للحقائب"
+            className="w-full rounded-lg border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none transition"
+          />
+          <p className="text-[10px] text-slate-400 mt-1">* نستخدم هذا الاسم لنتذكر أسلوبك ونوفر لك أوصافاً فريدة دائماً.</p>
+        </div>
+
         {/* Image Upload */}
         <div className="w-full">
           <label className="block text-sm font-bold text-slate-700 mb-2">
@@ -98,9 +113,9 @@ export const ProductForm: React.FC<ProductFormProps> = ({ input, setInput, onSub
 
         <button
           onClick={onSubmit}
-          disabled={loading || !input.name || !input.image}
+          disabled={loading || !input.name || !input.image || !input.merchantId}
           className={`w-full py-4 rounded-xl font-bold text-lg shadow-md transition-all transform active:scale-95
-            ${loading || !input.name || !input.image 
+            ${loading || !input.name || !input.image || !input.merchantId
               ? 'bg-slate-200 text-slate-400 cursor-not-allowed' 
               : 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-emerald-200'
             }`}
@@ -111,10 +126,10 @@ export const ProductForm: React.FC<ProductFormProps> = ({ input, setInput, onSub
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              جاري توليد القائمة السحرية...
+              جاري التذكر والتوليد...
             </span>
           ) : (
-            'توليد قائمة بيع سحرية ✨'
+            'توليد قائمة ذكية وفريدة ✨'
           )}
         </button>
       </div>
